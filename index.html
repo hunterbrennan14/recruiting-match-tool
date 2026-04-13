@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recruiting Match Tool</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Recruiting Match Tool</h1>
+      <p class="subtitle">Evaluate candidate-role fit and generate client emails</p>
+    </header>
+
+    <div class="panels">
+      <!-- LEFT: Role Input -->
+      <section class="panel">
+        <h2>Client & Role</h2>
+        <label for="firmName">Client Firm Name</label>
+        <input type="text" id="firmName" placeholder="e.g. Smith & Associates LLP">
+
+        <label for="roleTitle">Role Title</label>
+        <input type="text" id="roleTitle" placeholder="e.g. Senior Insurance Defense Associate">
+
+        <label for="roleDescription">Job Description</label>
+        <textarea id="roleDescription" rows="12" placeholder="Paste the full job description from the client here..."></textarea>
+      </section>
+
+      <!-- RIGHT: Candidate Input -->
+      <section class="panel">
+        <h2>Candidate</h2>
+        <label for="candidateName">Candidate Name</label>
+        <input type="text" id="candidateName" placeholder="e.g. Jane Doe">
+
+        <label for="resumeText">Resume Text</label>
+        <textarea id="resumeText" rows="8" placeholder="Paste the candidate's resume text here..."></textarea>
+
+        <label for="screenNotes">Screening Notes</label>
+        <textarea id="screenNotes" rows="4" placeholder="Your notes from the phone screen..."></textarea>
+      </section>
+    </div>
+
+    <div class="actions">
+      <button id="evaluateBtn" onclick="evaluateMatch()">Evaluate Match</button>
+      <button id="clearBtn" onclick="clearAll()" class="secondary">Clear All</button>
+      <button id="loadSampleBtn" onclick="loadSample()" class="secondary">Load Sample Data</button>
+    </div>
+
+    <!-- RESULTS -->
+    <div id="results" class="results hidden">
+      <h2>Match Results</h2>
+
+      <div class="score-header">
+        <div id="overallScore" class="score-circle">--</div>
+        <div id="recommendation" class="recommendation">Waiting for evaluation...</div>
+      </div>
+
+      <div class="score-breakdown">
+        <h3>Score Breakdown</h3>
+        <div class="score-row"><span>Skills Match</span><div class="bar-bg"><div id="barSkills" class="bar"></div></div><span id="scoreSkills">--</span></div>
+        <div class="score-row"><span>Experience Level</span><div class="bar-bg"><div id="barExperience" class="bar"></div></div><span id="scoreExperience">--</span></div>
+        <div class="score-row"><span>Practice Area Fit</span><div class="bar-bg"><div id="barPractice" class="bar"></div></div><span id="scorePractice">--</span></div>
+        <div class="score-row"><span>Seniority Alignment</span><div class="bar-bg"><div id="barSeniority" class="bar"></div></div><span id="scoreSeniority">--</span></div>
+        <div class="score-row"><span>Culture / Environment Fit</span><div class="bar-bg"><div id="barCulture" class="bar"></div></div><span id="scoreCulture">--</span></div>
+      </div>
+
+      <div class="flags-section">
+        <h3>Risk Flags</h3>
+        <ul id="riskFlags"></ul>
+      </div>
+
+      <div class="email-section">
+        <h3>Client Email Draft</h3>
+        <textarea id="emailDraft" rows="6" readonly></textarea>
+        <button onclick="copyEmail()" class="copy-btn">Copy Email to Clipboard</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
